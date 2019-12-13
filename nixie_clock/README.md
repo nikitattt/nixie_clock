@@ -1,6 +1,6 @@
 # nixie_clock
 
-Nixie clock for Flutter Clock chalange.
+Nixie clock for Flutter Clock challenge.
 
 ## Getting Started
 
