@@ -37,53 +37,88 @@ class NixieClock extends StatefulWidget {
 }
 
 class _NixieClockState extends State<NixieClock> {
+  DateTime _dateTime = DateTime.now();
+  Timer _timer;
+  @override
+  void initState() {
+    super.initState();
+    widget.model.addListener(_updateModel);
+    _updateTime();
+    _updateModel();
+  }
+
+  @override
+  void didUpdateWidget(NixieClock oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.model != oldWidget.model) {
+      oldWidget.model.removeListener(_updateModel);
+      widget.model.addListener(_updateModel);
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    widget.model.removeListener(_updateModel);
+    widget.model.dispose();
+    super.dispose();
+  }
+
+  void _updateModel() {
+    setState(() {
+      // Cause the clock to rebuild when the model changes.
+    });
+  }
+
+  void _updateTime() {
+    setState(() {
+      _dateTime = DateTime.now();
+      _timer = Timer(
+        Duration(minutes: 1) -
+            Duration(seconds: _dateTime.second) -
+            Duration(milliseconds: _dateTime.millisecond),
+        _updateTime,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final hour =
+        DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
+    final minute = DateFormat('mm').format(_dateTime);
     return Container(
-//      height: 390,
-//      width: 100,
-      color: Colors.green,
-      child:
-      Row(
+      color: Color.fromRGBO(34, 39, 43, 100),
+      child: Row(
         children: <Widget>[
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Container(
-              child: FlareActor(
-                  "assets/rive/nixie.flr"
-              ),
+              child: FlareActor("assets/rive/nixie.flr"),
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Container(
-              child: FlareActor(
-                  "assets/rive/nixie.flr"
-              ),
+              child: FlareActor("assets/rive/nixie.flr"),
             ),
           ),
           Expanded(
             flex: 1,
             child: Container(
-              child: FlareActor(
-                  "assets/rive/nixie_middle.flr"
-              ),
+              child: FlareActor("assets/rive/nixie_middle.flr"),
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Container(
-              child: FlareActor(
-                  "assets/rive/nixie.flr"
-              ),
+              child: FlareActor("assets/rive/nixie.flr"),
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Container(
-              child: FlareActor(
-                  "assets/rive/nixie.flr"
-              ),
+              child: FlareActor("assets/rive/nixie.flr"),
             ),
           ),
         ],
@@ -91,9 +126,6 @@ class _NixieClockState extends State<NixieClock> {
     );
   }
 }
-
-
-
 
 /// A basic digital clock.
 ///
@@ -168,7 +200,7 @@ class _DigitalClockState extends State<DigitalClock> {
         ? _lightTheme
         : _darkTheme;
     final hour =
-    DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
+        DateFormat(widget.model.is24HourFormat ? 'HH' : 'hh').format(_dateTime);
     final minute = DateFormat('mm').format(_dateTime);
     final fontSize = MediaQuery.of(context).size.width / 3.5;
     final offset = -fontSize / 7;
