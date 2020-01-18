@@ -25,7 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_clock_helper:
     path: ../flutter_clock_helper
-  flare_flutter: ^1.8.1
+  flare_flutter: ^2.0.1
 
 dev_dependencies:
   flutter_test:
