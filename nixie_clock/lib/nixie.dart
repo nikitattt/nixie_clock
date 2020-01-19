@@ -2,8 +2,10 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class Nixie extends StatefulWidget {
-  Nixie({Key key, @required this.timeNumber}) : super(key: key);
+  Nixie({Key key, @required this.timeNumber, @required this.maxTimeNumber})
+      : super(key: key);
   final int timeNumber;
+  final int maxTimeNumber;
 
   @override
   _NixieState createState() => _NixieState();
@@ -13,16 +15,11 @@ class _NixieState extends State<Nixie> {
   String _animation;
 
   void _setOffAnimation() {
-    int number;
-
     if (widget.timeNumber == 0) {
-      number = 9;
-    } else if (widget.timeNumber == 9) {
-      number = 0;
+      _animation = '${widget.maxTimeNumber}Off';
     } else {
-      number = widget.timeNumber - 1;
+      _animation = '${widget.timeNumber - 1}Off';
     }
-    _animation = '${number}Off';
   }
 
   @override
@@ -31,7 +28,7 @@ class _NixieState extends State<Nixie> {
     super.initState();
   }
 
-@override
+  @override
   void didUpdateWidget(Nixie oldWidget) {
     if (oldWidget.timeNumber != widget.timeNumber) {
       _setOffAnimation();
@@ -41,13 +38,19 @@ class _NixieState extends State<Nixie> {
 
   @override
   Widget build(BuildContext context) {
-    return FlareActor("assets/rive/nixie.flr", animation: _animation,
-      callback: (name) {
-      if (name.contains("Off")) {
-        setState(() {
-          _animation = '${widget.timeNumber}On';
-        });
-      }
-    });
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        height: 300,
+        child: FlareActor("assets/rive/nixie.flr", animation: _animation,
+            callback: (name) {
+          if (name.contains("Off")) {
+            setState(() {
+              _animation = '${widget.timeNumber}On';
+            });
+          }
+        }),
+      ),
+    );
   }
 }

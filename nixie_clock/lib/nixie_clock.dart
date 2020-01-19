@@ -97,37 +97,33 @@ class _NixieClockState extends State<NixieClock> {
         children: <Widget>[
           Expanded(
             flex: 2,
-            child: Nixie(
-                timeNumber: hourFirst,
-              ),
+            child: Nixie(timeNumber: hourFirst, maxTimeNumber: 2),
           ),
           Expanded(
             flex: 2,
-            child: Nixie(
-                timeNumber: hourSecond,
-              ),
+            child: Nixie(timeNumber: hourSecond, maxTimeNumber: 9),
           ),
           Expanded(
             flex: 1,
-            child: Container(
-              child: FlareActor("assets/rive/nixie_middle.flr"),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              child: Nixie(
-                timeNumber: minuteFirst,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                // color: Colors.amber,
+                height: 300,
+                child: FlareActor(
+                  "assets/rive/nixie_middle.flr",
+                  animation: 'idle',
+                ),
               ),
             ),
           ),
           Expanded(
             flex: 2,
-            child: Container(
-              child: Nixie(
-                timeNumber: minuteSecond,
-              ),
-            ),
+            child: Nixie(timeNumber: minuteFirst, maxTimeNumber: 5),
+          ),
+          Expanded(
+            flex: 2,
+            child: Nixie(timeNumber: minuteSecond, maxTimeNumber: 9),
           ),
         ],
       ),
