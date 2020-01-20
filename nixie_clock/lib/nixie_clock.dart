@@ -111,7 +111,6 @@ class _NixieClockState extends State<NixieClock> {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    // color: Colors.amber,
                     height: 300,
                     child: FlareActor(
                       "assets/rive/nixie_middle.flr",
@@ -132,16 +131,10 @@ class _NixieClockState extends State<NixieClock> {
           ),
           Container(
             height: 35,
-            margin: EdgeInsets.symmetric(
-              horizontal: 3 
-            ),
+            margin: EdgeInsets.symmetric(horizontal: 3),
             decoration: BoxDecoration(
-              color: const Color.fromRGBO(56, 56, 56, 1.0),
+              color: const Color.fromRGBO(56, 57, 59, 1.0),
               borderRadius: const BorderRadius.all(Radius.circular(3)),
-              gradient: new LinearGradient(colors: [
-                Color.fromRGBO(56, 56, 56, 1.0),
-                Color.fromRGBO(52, 52, 53, 1.0)
-              ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
             ),
           ),
           Row(
@@ -149,24 +142,29 @@ class _NixieClockState extends State<NixieClock> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(left: 15),
-                child: Container(
-                  height: 15,
-                  width: 35,
-                  color: const Color.fromRGBO(123, 130, 140, 1.0),
-                ),
+                child: _baseLeg,
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 15),
-                child: Container(
-                  height: 15,
-                  width: 35,
-                  color: const Color.fromRGBO(123, 130, 140, 1.0),
-                ),
+                child: _baseLeg,
               )
             ],
           )
         ],
       ),
     );
+  }
+
+  Widget get _baseLeg {
+    return Container(
+        height: 15,
+        width: 35,
+        decoration: BoxDecoration(
+          color: const Color.fromRGBO(124, 126, 130, 1.0),
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(3),
+            bottomRight: Radius.circular(3),
+          ),
+        ));
   }
 }
