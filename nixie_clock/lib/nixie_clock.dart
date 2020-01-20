@@ -92,7 +92,7 @@ class _NixieClockState extends State<NixieClock> {
         _extractOneNumber(int.parse(minute), _NumberExtractType.second);
 
     return Container(
-      color: Color.fromRGBO(10, 10, 10, 100),
+      color: const Color.fromRGBO(10, 10, 10, 100),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
@@ -132,8 +132,12 @@ class _NixieClockState extends State<NixieClock> {
           ),
           Container(
             height: 35,
+            margin: EdgeInsets.symmetric(
+              horizontal: 3 
+            ),
             decoration: BoxDecoration(
-              color: Color.fromRGBO(56, 56, 56, 1.0),
+              color: const Color.fromRGBO(56, 56, 56, 1.0),
+              borderRadius: const BorderRadius.all(Radius.circular(3)),
               gradient: new LinearGradient(colors: [
                 Color.fromRGBO(56, 56, 56, 1.0),
                 Color.fromRGBO(52, 52, 53, 1.0)
@@ -147,16 +151,16 @@ class _NixieClockState extends State<NixieClock> {
                 padding: const EdgeInsets.only(left: 15),
                 child: Container(
                   height: 15,
-                  width: 30,
-                  color: Colors.grey,
+                  width: 35,
+                  color: const Color.fromRGBO(123, 130, 140, 1.0),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 15),
                 child: Container(
                   height: 15,
-                  width: 30,
-                  color: Colors.grey,
+                  width: 35,
+                  color: const Color.fromRGBO(123, 130, 140, 1.0),
                 ),
               )
             ],
