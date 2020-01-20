@@ -92,39 +92,75 @@ class _NixieClockState extends State<NixieClock> {
         _extractOneNumber(int.parse(minute), _NumberExtractType.second);
 
     return Container(
-      color: Color.fromRGBO(34, 39, 43, 100),
-      child: Row(
+      color: Color.fromRGBO(10, 10, 10, 100),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Nixie(timeNumber: hourFirst, maxTimeNumber: 2),
-          ),
-          Expanded(
-            flex: 2,
-            child: Nixie(timeNumber: hourSecond, maxTimeNumber: 9),
-          ),
-          Expanded(
-            flex: 1,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                // color: Colors.amber,
-                height: 300,
-                child: FlareActor(
-                  "assets/rive/nixie_middle.flr",
-                  animation: 'idle',
+          Row(
+            children: <Widget>[
+              Expanded(
+                flex: 2,
+                child: Nixie(timeNumber: hourFirst, maxTimeNumber: 2),
+              ),
+              Expanded(
+                flex: 2,
+                child: Nixie(timeNumber: hourSecond, maxTimeNumber: 9),
+              ),
+              Expanded(
+                flex: 1,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    // color: Colors.amber,
+                    height: 300,
+                    child: FlareActor(
+                      "assets/rive/nixie_middle.flr",
+                      animation: 'idle',
+                    ),
+                  ),
                 ),
               ),
+              Expanded(
+                flex: 2,
+                child: Nixie(timeNumber: minuteFirst, maxTimeNumber: 5),
+              ),
+              Expanded(
+                flex: 2,
+                child: Nixie(timeNumber: minuteSecond, maxTimeNumber: 9),
+              ),
+            ],
+          ),
+          Container(
+            height: 35,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(56, 56, 56, 1.0),
+              gradient: new LinearGradient(colors: [
+                Color.fromRGBO(56, 56, 56, 1.0),
+                Color.fromRGBO(52, 52, 53, 1.0)
+              ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Nixie(timeNumber: minuteFirst, maxTimeNumber: 5),
-          ),
-          Expanded(
-            flex: 2,
-            child: Nixie(timeNumber: minuteSecond, maxTimeNumber: 9),
-          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: Container(
+                  height: 15,
+                  width: 30,
+                  color: Colors.grey,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: Container(
+                  height: 15,
+                  width: 30,
+                  color: Colors.grey,
+                ),
+              )
+            ],
+          )
         ],
       ),
     );
