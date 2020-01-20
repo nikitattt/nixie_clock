@@ -26,6 +26,7 @@ dependencies:
   flutter_clock_helper:
     path: ../flutter_clock_helper
   flare_flutter: ^2.0.1
+  flutter_screenutil: ^1.0.2
 
 dev_dependencies:
   flutter_test:

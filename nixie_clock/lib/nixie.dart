@@ -1,5 +1,6 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Nixie extends StatefulWidget {
   Nixie({Key key, @required this.timeNumber, @required this.maxTimeNumber})
@@ -41,7 +42,7 @@ class _NixieState extends State<Nixie> {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Container(
-        height: 300,
+        height: ScreenUtil().setHeight(700),
         child: FlareActor("assets/rive/nixie.flr", animation: _animation,
             callback: (name) {
           if (name.contains("Off")) {

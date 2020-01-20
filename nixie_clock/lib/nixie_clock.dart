@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter_clock_helper/model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:nixie_clock/nixie.dart';
 
@@ -31,6 +32,12 @@ class _NixieClockState extends State<NixieClock> {
     widget.model.addListener(_updateModel);
     _updateTime();
     _updateModel();
+  }
+
+  @override
+  void didChangeDependencies() {
+    ScreenUtil.init(context, width: 1600, height: 960);
+    super.didChangeDependencies();
   }
 
   @override
@@ -111,7 +118,7 @@ class _NixieClockState extends State<NixieClock> {
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    height: 300,
+                    height: ScreenUtil().setHeight(700),
                     child: FlareActor(
                       "assets/rive/nixie_middle.flr",
                       animation: 'idle',
@@ -130,22 +137,23 @@ class _NixieClockState extends State<NixieClock> {
             ],
           ),
           Container(
-            height: 35,
-            margin: EdgeInsets.symmetric(horizontal: 3),
+            height: ScreenUtil().setHeight(95),
+            margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(6)),
             decoration: BoxDecoration(
               color: const Color.fromRGBO(56, 57, 59, 1.0),
-              borderRadius: const BorderRadius.all(Radius.circular(3)),
+              borderRadius:
+                  BorderRadius.all(Radius.circular(ScreenUtil().setWidth(5))),
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 15),
+                padding: EdgeInsets.only(left: ScreenUtil().setWidth(27)),
                 child: _baseLeg,
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 15),
+                padding: EdgeInsets.only(right: ScreenUtil().setWidth(27)),
                 child: _baseLeg,
               )
             ],
@@ -157,13 +165,13 @@ class _NixieClockState extends State<NixieClock> {
 
   Widget get _baseLeg {
     return Container(
-        height: 15,
-        width: 35,
+        height: ScreenUtil().setHeight(40),
+        width: ScreenUtil().setWidth(110),
         decoration: BoxDecoration(
           color: const Color.fromRGBO(124, 126, 130, 1.0),
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(3),
-            bottomRight: Radius.circular(3),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(ScreenUtil().setWidth(5)),
+            bottomRight: Radius.circular(ScreenUtil().setWidth(5)),
           ),
         ));
   }
